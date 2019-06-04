@@ -1,13 +1,16 @@
 # essentia-challenge
 
 ### Escolha da linguagem e frameworks
-Como o teste solicitou que se use a linguagem mais confortavel, vou de Ruby. É a linguagem que tenho mais experiência.
+Vou usar Ruby on Rails porque é a linguagem que tenho mais experiência.
 
 ### Upload da imagem do cliente
-Vou optar por comprimir a imagem salvar em base64 no banco de dados para simplificar a solução. Para soluções mais escaláveis, opções como S3 da amazon seria mais performático.
+Vou salvar em base64 no banco de dados para simplificar a solução. Para uma solução mais performática, com certeza usaria algum serviço como S3 da Amazon.
+
+### Sobre o formulário
+Adicionei apenas mais um campo de data de nascimento. Fiz apenas as validações mais importantes.
 
 ### Link para demo rodando em modo produção no Heroku
-...
+https://essentia-challenge.herokuapp.com/
 
 ### Dependencias
 * docker
@@ -24,7 +27,7 @@ Build dos containers do banco de dados e da aplicação e depois irá criar o ba
 ./start.sh
 ```
 
-### Rodar testes
+### Rodar os testes
 ```
 docker-compose run web rails t
 ```

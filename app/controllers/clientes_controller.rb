@@ -25,6 +25,7 @@ class ClientesController < ApplicationController
   # POST /clientes.json
   def create
     @cliente = Cliente.new(cliente_params)
+    set_foto
 
     respond_to do |format|
       if @cliente.save
@@ -41,6 +42,7 @@ class ClientesController < ApplicationController
   # PATCH/PUT /clientes/1.json
   def update
     respond_to do |format|
+      set_foto
       if @cliente.update(cliente_params)
         format.html { redirect_to @cliente, notice: 'Cliente was successfully updated.' }
         format.json { render :show, status: :ok, location: @cliente }
@@ -65,6 +67,13 @@ class ClientesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_cliente
       @cliente = Cliente.find(params[:id])
+    end
+
+    def set_foto
+      if params[:foto]
+        encoded_image = Base64.encode64 params[:foto].read
+        @cliente.foto = encoded_image
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,48 +1,52 @@
 <h1>Clientes</h1>
 
-<table class="striped">
-  <thead>
-    <tr>
-      <th>Foto</th>
-      <th>Nome</th>
-      <th>Email</th>
-      <th>Data de nascimento</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% if @clientes.size > 0 %>
+    <table class="striped">
+    <thead>
+        <tr>
+        <th>Foto</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Data de nascimento</th>
+        <th colspan="3"></th>
+        </tr>
+    </thead>
 
-  <tbody>
-    <% @clientes.each do |cliente| %>
-      <tr>
-        <td>
-            <image style="max-width: 120px;" src="data:image/png;base64, <%= cliente.foto %>" />
-        </td>
-        <td><%= cliente.nome %></td>
-        <td><%= cliente.email %></td>
-        <td>
-            <% if cliente.data_nascimento %>
-                <%= I18n.l cliente.data_nascimento %>
-            <% end %>
-        </td>
-        <td>
-            <%= link_to(cliente, class: "btn-floating waves-effect waves-light blue") do %>
-                <i class="material-icons">zoom_in</i>
-            <% end %>
-        </td>
-        <td>
-            <%= link_to(edit_cliente_path(cliente), class: "btn-floating waves-effect waves-light green") do %>
-                <i class="material-icons">edit</i>
-            <% end %>
-        </td>
-        <td>
-            <%= link_to(cliente, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn-floating waves-effect waves-light black") do %>
-                <i class="material-icons">delete</i>
-            <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <tbody>
+        <% @clientes.each do |cliente| %>
+        <tr>
+            <td>
+                <image style="max-width: 120px;" src="data:image/png;base64, <%= cliente.foto %>" />
+            </td>
+            <td><%= cliente.nome %></td>
+            <td><%= cliente.email %></td>
+            <td>
+                <% if cliente.data_nascimento %>
+                    <%= I18n.l cliente.data_nascimento %>
+                <% end %>
+            </td>
+            <td>
+                <%= link_to(cliente, class: "btn-floating waves-effect waves-light blue") do %>
+                    <i class="material-icons">zoom_in</i>
+                <% end %>
+            </td>
+            <td>
+                <%= link_to(edit_cliente_path(cliente), class: "btn-floating waves-effect waves-light green") do %>
+                    <i class="material-icons">edit</i>
+                <% end %>
+            </td>
+            <td>
+                <%= link_to(cliente, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn-floating waves-effect waves-light black") do %>
+                    <i class="material-icons">delete</i>
+                <% end %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+    </table>
+<% else %>
+    <p class="center">Nenhum cliente cadastrado.</p>
+<% end %>
 
 <br>
 

@@ -28,12 +28,20 @@
             <p>
             <strong>Foto:</strong>
             <br/>
-            <image src="data:image/png;base64, <%= @cliente.foto %>" />
+
+
+            <% if @cliente.foto %>
+                <image style="max-width: 340px" src="data:image/png;base64, <%= @cliente.foto %>" />
+            <% else %>
+                <%= image_tag "fotoperfil", style: "max-width: 340px" %>
+            <% end %>
             </p>
 
             <p>
             <strong>Data de nascimento:</strong>
-            <%= I18n.l @cliente.data_nascimento %>
+            <% if @cliente.data_nascimento %>
+                <%= I18n.l @cliente.data_nascimento %>
+            <% end %>
             </p>
 
 

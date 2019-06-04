@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: paulo
+  email: foo@bar.com
+  telefone: 493943994 
+  data_nascimento: 1950-01-01
+
+two:
+  nome: joao silva
+  email: foo@bxr.com
+  telefone: foo
+  data_nascimento: 1984-06-04

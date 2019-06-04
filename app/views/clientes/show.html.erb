@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel">
+
+            <%= link_to(clientes_path, class: "btn-floating waves-effect waves-light red") do %>
+                <i class="material-icons">arrow_back</i>
+            <% end %>
+
+            <%= link_to(edit_cliente_path(@cliente), class: "btn-floating waves-effect waves-light green") do %>
+                <i class="material-icons">edit</i>
+            <% end %>
+
+            <p>
+            <strong>Nome:</strong>
+            <%= @cliente.nome %>
+            </p>
+
+            <p>
+            <strong>Email:</strong>
+            <%= @cliente.email %>
+            </p>
+
+            <p>
+            <strong>Telefone:</strong>
+            <%= @cliente.telefone %>
+            </p>
+
+            <p>
+            <strong>Foto:</strong>
+            <br/>
+
+
+            <% if @cliente.foto %>
+                <image style="max-width: 340px" src="data:image/png;base64, <%= @cliente.foto %>" />
+            <% else %>
+                <%= image_tag "fotoperfil", style: "max-width: 340px" %>
+            <% end %>
+            </p>
+
+            <p>
+            <strong>Data de nascimento:</strong>
+            <% if @cliente.data_nascimento %>
+                <%= I18n.l @cliente.data_nascimento %>
+            <% end %>
+            </p>
+
+
+
+        </div>
+    </div>
+</div>

@@ -2,7 +2,10 @@
         <%= form_with(model: cliente, local: true, :html => { :multipart => true }) do |form| %>
         <% if cliente.errors.any? %>
             <div id="error_explanation">
-            <h2><%= pluralize(cliente.errors.count, "error") %> prohibited this cliente from being saved:</h2>
+            <h4 class="red-text">
+                <i class="material-icons">error</i>
+                <%= pluralize(cliente.errors.count, "erro impediu", "erros impediram") %> esse cliente de ser salvo:
+            </h4>
 
             <ul>
             <% cliente.errors.full_messages.each do |message| %>
@@ -28,10 +31,9 @@
         </div>
 
         <div class="field">
-            <%= form.label :foto %>
             <div class="file-field input-field">
                 <div class="btn">
-                    <span>File</span>
+                    <span>Foto do cliente</span>
                     <input type="file" id="input-foto" name="foto">
                 </div>
                 <div class="file-path-wrapper">
@@ -47,7 +49,7 @@
 
         <div class="field">
             <%= form.label :data_nascimento %>
-            <%= form.text_field :data_nascimento, class: "datepicker" %>
+            <%= form.text_field :data_nascimento, class: "datepicker", value: I18n.l(cliente.data_nascimento) %>
         </div>
 
         <div class="actions">
@@ -56,8 +58,31 @@
         <% end %>
 
         <script>
+
         $(document).ready(function(){
-            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                format:'dd/mm/yyyy',
+                i18n:{
+                months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
+                weekdaysAbbrev: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                today: 'Hoje',
+                clear: 'Limpar',
+                close: 'Pronto',
+                labelMonthNext: 'Próximo mês',
+                labelMonthPrev: 'Mês anterior',
+                labelMonthSelect: 'Selecione um mês',
+                labelYearSelect: 'Selecione um ano',
+                selectMonths: true,
+                selectYears: 15,
+                cancel: 'Cancelar',
+                clear: 'Limpar'
+            }
+            });
+
+            $('.datepicker').datepicker('setDate', "<%= cliente.data_nascimento+1.day %>");
         });
 
         function fotoPreview(input) {

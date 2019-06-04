@@ -1,10 +1,10 @@
 # essentia-challenge
 
 ### Escolha da linguagem e frameworks
-Vou usar Ruby on Rails porque é a linguagem que tenho mais experiência.
+Usei Ruby on Rails porque é a linguagem que tenho mais experiência.
 
 ### Upload da imagem do cliente
-Vou salvar em base64 no banco de dados para simplificar a solução. Para uma solução mais performática, com certeza usaria algum serviço como S3 da Amazon.
+Salvei em base64 no banco de dados para simplificar a solução. Para uma solução mais performática, com certeza usaria algum serviço como S3 da Amazon.
 
 ### Sobre o formulário
 Adicionei apenas mais um campo de data de nascimento. Fiz apenas as validações mais importantes.

@@ -1,6 +1,15 @@
-<h1>Editing Cliente</h1>
 
-<%= render 'form', cliente: @cliente %>
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel">
 
-<%= link_to 'Show', @cliente %> |
-<%= link_to 'Back', clientes_path %>
+            <h3>Editar Cliente</h3>
+
+            <%= render 'form', cliente: @cliente %>
+
+            <%= link_to 'Show', @cliente %> |
+            <%= link_to 'Back', clientes_path %>
+
+        </div>
+    </div>
+</div>

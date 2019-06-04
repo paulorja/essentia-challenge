@@ -1,78 +1,80 @@
-<%= form_with(model: cliente, local: true, :html => { :multipart => true }) do |form| %>
-  <% if cliente.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(cliente.errors.count, "error") %> prohibited this cliente from being saved:</h2>
 
-      <ul>
-      <% cliente.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <%= form_with(model: cliente, local: true, :html => { :multipart => true }) do |form| %>
+        <% if cliente.errors.any? %>
+            <div id="error_explanation">
+            <h2><%= pluralize(cliente.errors.count, "error") %> prohibited this cliente from being saved:</h2>
 
-  <div class="field">
-    <%= form.label "Nome *" %>
-    <%= form.text_field :nome %>
-  </div>
+            <ul>
+            <% cliente.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+            </ul>
+            </div>
+        <% end %>
 
-  <div class="field">
-    <%= form.label "Email *" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :telefone %>
-    <%= form.text_field :telefone %>
-  </div>
-
-  <div class="field">
-    <%= form.label :foto %>
-    <div class="file-field input-field">
-        <div class="btn">
-            <span>File</span>
-            <input type="file" id="input-foto" name="foto">
+        <div class="field">
+            <%= form.label "Nome *" %>
+            <%= form.text_field :nome %>
         </div>
-        <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
+
+        <div class="field">
+            <%= form.label "Email *" %>
+            <%= form.text_field :email %>
         </div>
-    </div>
-    <% if cliente.foto %>
-        <image src="data:image/png;base64, <%= cliente.foto %>" id="preview-foto" />
-    <% else %>
-        <%= image_tag "fotoperfil", id: "preview-foto" %>
-    <% end %>
-  </div>
 
-  <div class="field">
-    <%= form.label :data_nascimento %>
-    <%= form.text_field :data_nascimento, class: "datepicker" %>
-  </div>
+        <div class="field">
+            <%= form.label :telefone %>
+            <%= form.text_field :telefone %>
+        </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+        <div class="field">
+            <%= form.label :foto %>
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>File</span>
+                    <input type="file" id="input-foto" name="foto">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+            <% if cliente.foto %>
+                <image src="data:image/png;base64, <%= cliente.foto %>" id="preview-foto" />
+            <% else %>
+                <%= image_tag "fotoperfil", id: "preview-foto" %>
+            <% end %>
+        </div>
 
-<script>
-$(document).ready(function(){
-     $('.datepicker').datepicker();
-});
+        <div class="field">
+            <%= form.label :data_nascimento %>
+            <%= form.text_field :data_nascimento, class: "datepicker" %>
+        </div>
 
-function fotoPreview(input) {
+        <div class="actions">
+            <%= form.submit %>
+        </div>
+        <% end %>
 
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        <script>
+        $(document).ready(function(){
+            $('.datepicker').datepicker();
+        });
 
-        reader.onload = function(e) {
-            $('#preview-foto').attr('src', e.target.result);
+        function fotoPreview(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#preview-foto').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+        $("#input-foto").change(function() {
+            fotoPreview(this);
+        });
+        </script>
 
-$("#input-foto").change(function() {
-     fotoPreview(this);
-});
-</script>

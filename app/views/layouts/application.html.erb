@@ -7,9 +7,16 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
   <body>
+      <nav>
+      <div class="nav-wrapper">
+          <%= link_to "Essentia Challenge", clientes_path, class: "brand-logo center" %>
+      </div>
+      </nav>
     <%= yield %>
   </body>
 </html>

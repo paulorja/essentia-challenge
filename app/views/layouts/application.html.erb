@@ -18,5 +18,9 @@
       </div>
       </nav>
     <%= yield %>
+
+    <% if notice %>
+        <%= javascript_tag "M.toast({html: '#{notice}'})" %>
+    <% end %>
   </body>
 </html>

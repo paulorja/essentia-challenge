@@ -41,19 +41,26 @@
                 </div>
             </div>
             <% if cliente.foto %>
-                <image src="data:image/png;base64, <%= cliente.foto %>" id="preview-foto" />
+                <image style="max-width: 340px" src="data:image/png;base64, <%= cliente.foto %>" id="preview-foto" />
             <% else %>
-                <%= image_tag "fotoperfil", id: "preview-foto" %>
+                <%= image_tag "fotoperfil", id: "preview-foto", style: "max-width: 340px" %>
             <% end %>
         </div>
 
         <div class="field">
             <%= form.label :data_nascimento %>
-            <%= form.text_field :data_nascimento, class: "datepicker", value: I18n.l(cliente.data_nascimento) %>
+            <% if cliente.data_nascimento %>
+                <%= form.text_field :data_nascimento, class: "datepicker", value: I18n.l(cliente.data_nascimento) %>
+            <% else %>
+                <%= form.text_field :data_nascimento, class: "datepicker" %>
+            <% end %>
         </div>
 
-        <div class="actions">
-            <%= form.submit %>
+        <div class="actions center">
+            <button class="btn-large waves-effect waves-light blue" type="submit" name="action">
+                Salvar
+                <i class="material-icons right">send</i>
+            </button>
         </div>
         <% end %>
 
@@ -62,27 +69,31 @@
         $(document).ready(function(){
             $('.datepicker').datepicker({
                 format:'dd/mm/yyyy',
+                yearRange: [1918, 2019],
+                minDate: new Date(1918, 01, 01),
+                maxDate: new Date(),
                 i18n:{
-                months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
-                weekdaysAbbrev: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-                weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-                today: 'Hoje',
-                clear: 'Limpar',
-                close: 'Pronto',
-                labelMonthNext: 'Próximo mês',
-                labelMonthPrev: 'Mês anterior',
-                labelMonthSelect: 'Selecione um mês',
-                labelYearSelect: 'Selecione um ano',
-                selectMonths: true,
-                selectYears: 15,
-                cancel: 'Cancelar',
-                clear: 'Limpar'
-            }
+                    months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
+                    weekdaysAbbrev: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                    weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                    today: 'Hoje',
+                    clear: 'Limpar',
+                    close: 'Pronto',
+                    labelMonthNext: 'Próximo mês',
+                    labelMonthPrev: 'Mês anterior',
+                    labelMonthSelect: 'Selecione um mês',
+                    labelYearSelect: 'Selecione um ano',
+                    selectMonths: true,
+                    cancel: 'Cancelar',
+                    clear: 'Limpar'
+                }
             });
 
-            $('.datepicker').datepicker('setDate', "<%= cliente.data_nascimento+1.day %>");
+            <% if cliente.data_nascimento %>
+                $('.datepicker').datepicker('setDate', "<%= cliente.data_nascimento+1.day %>");
+            <% end %>
         });
 
         function fotoPreview(input) {
